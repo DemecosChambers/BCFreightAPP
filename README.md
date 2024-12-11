@@ -1,57 +1,132 @@
-# BCFreightAPP
-BCloud Freight Load App
-Downloading and Running the Application
+Downloading and Installing BCFreightAPP on Windows and macOS
+This guide provides step-by-step instructions on how to download and install the BCFreightAPP from GitHub on both Windows and macOS.
+GitHub Repository: https://github.com/DemecosChambers/BCFreightAPP
 
+Prerequisites
+Windows: PowerShell, Node.js and npm (installed via Chocolatey)
+macOS: Terminal, Node.js and npm (installed via Homebrew)
+I. Downloading the Files
 1. Download the ZIP file:
-
 Go to the GitHub repository: https://github.com/DemecosChambers/BCFreightAPP
-Click the green "Code" button.
+Click the "Code" button (green button).
 Select "Download ZIP".
+
+
 2. Extract the ZIP file:
+Windows: Right-click the downloaded ZIP file and select "Extract All...". Choose a destination folder for the extracted files (e.g., C:\BCFreightAPP).
+macOS: Double-click the downloaded ZIP file. It will automatically extract to a folder with the same name in the same location.
+Example:
 
-Windows: Right-click the ZIP file and select "Extract All...".
-macOS: Double-click the ZIP file.
-3. Install Node.js and npm:
+II. Installing the App
+Windows
+1. Install Chocolatey (if not already installed):
+Open PowerShell as administrator.
+Run the following command:
 
-If you don't have Node.js and npm installed, download and install them from the official website: https://nodejs.org/1   
-1.
-github.com
-MIT
-github.com
-4. Open a terminal or command prompt:
+PowerShell
 
-Windows:
-Press the Windows key.
-Type "cmd" and press Enter.
-macOS:
-Press Command + Space to open Spotlight.
-Type "Terminal" and press Enter.
-5. Navigate to the project directory:
 
-Use the cd command to navigate to the directory where you extracted the ZIP file. For example:
-Bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-cd C:\Users\YourName\Downloads\BCFreightAPP-main 
-6. Install dependencies:
 
-Run the following command to install the required Node.js packages:
 
-Bash
+2. Install Node.js and npm:
+In PowerShell, run:
+
+PowerShell
+
+
+choco install nodejs -y
+
+
+
+3. Navigate to the project directory:
+In PowerShell, use the cd command to navigate to the directory where you extracted the files.
+
+PowerShell
+
+
+cd C:\BCFreightAPP 
+
+
+
+4. Install dependencies:
+Run the following command in PowerShell:
+
+PowerShell
+
 
 npm install
-7. Start the application:
 
-Run the following command to start the Node.js server:
+
+
+5. Run the app:
+In PowerShell, run:
+
+PowerShell
+
+
+node index.js
+
+
+
+6. Verify the application:
+Open a web browser and go to http://localhost:3000. You should see the freight load information form.
+Example:
+
+macOS
+1. Install Homebrew (if not already installed):
+Open Terminal.
+Paste the following command and press Enter:
 
 Bash
 
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+
+Example:
+
+2. Install Node.js and npm:
+In Terminal, run:
+
+Bash
+
+
+brew install node
+
+
+3. Navigate to the project directory:
+In Terminal, use the cd command to navigate to the directory where you extracted the files.
+
+Bash
+
+
+cd /path/to/BCFreightAPP
+
+
+4. Install dependencies:
+Run the following command in Terminal:
+
+Bash
+
+
+npm install
+
+
+5. Run the app:
+In Terminal, run:
+
+Bash
+
+
 node index.js
-8. Access the application:
 
-Open a web browser and go to http://localhost:3000 to access the application.
-Important Notes:
 
-Make sure you have all the necessary files in the project directory, including index.js and the public folder with index.html, css, and script.js (if used).
-If the application uses a different port, replace 3000 in the URL with the correct port number.
-This application seems designed for a Windows environment with PowerShell. You might need to adapt the deployment script (deploy-app.ps1) if you're using a different operating system.
-If you encounter any errors or have further questions, feel free to ask! I'm here to help you get this application up and running.
+6. Verify the application:
+Open a web browser and go to http://localhost:3000. You should see the freight load information form.
+Example:
+
+This completes the installation process for BCFreightAPP on both Windows and macOS. You can now start using the application to submit freight load information.
+Sources
+1. https://github.com/appliedsciencegroup/raspberry-pi-cybersecurity-intro
