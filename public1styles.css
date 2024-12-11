@@ -1,0 +1,8 @@
+/* Add your CSS styles here */
+body {
+  font-family: sans-serif;
+}
+
+#load-form label {
+  display: block;
+}
