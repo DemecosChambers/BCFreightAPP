@@ -1,132 +1,102 @@
-Downloading and Installing BCFreightAPP on Windows and macOS
-This guide provides step-by-step instructions on how to download and install the BCFreightAPP from GitHub on both Windows and macOS.
-GitHub Repository: https://github.com/DemecosChambers/BCFreightAPP
-
-Prerequisites
-Windows: PowerShell, Node.js and npm (installed via Chocolatey)
-macOS: Terminal, Node.js and npm (installed via Homebrew)
-I. Downloading the Files
-1. Download the ZIP file:
-Go to the GitHub repository: https://github.com/DemecosChambers/BCFreightAPP
-Click the "Code" button (green button).
-Select "Download ZIP".
-
-
-2. Extract the ZIP file:
-Windows: Right-click the downloaded ZIP file and select "Extract All...". Choose a destination folder for the extracted files (e.g., C:\BCFreightAPP).
-macOS: Double-click the downloaded ZIP file. It will automatically extract to a folder with the same name in the same location.
-Example:
-
-II. Installing the App
-Windows
-1. Install Chocolatey (if not already installed):
-Open PowerShell as administrator.
-Run the following command:
-
-PowerShell
-
-
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+Technical Documentation: Building and Deploying a Freight Web App on AWS with Terraform
+This document provides a comprehensive guide to building a basic freight web application and deploying it on AWS using Terraform. The application allows freight brokers to submit truck load information through a web form, with the potential for future integration with email notifications and other features.
+Project Goal:
+To create a cost-effective, highly available, and disaster-tolerant web application on AWS for managing freight load information.
+Technology Stack:
+Front-end: HTML, CSS, JavaScript (basic form with potential for future client-side enhancements)
+Back-end: Node.js with Express (simple web server to serve the front-end)
+Infrastructure as Code (IaC): Terraform (for provisioning and managing AWS resources)
+Cloud Platform: AWS (using EC2, VPC, RDS, Security Groups)
+Development Environment:
+Windows machine with PowerShell
+Code editor (e.g., Visual Studio Code)
+Git for version control (optional, but recommended)
+AWS account with appropriate permissions
+Step-by-Step Instructions:
+1. Set up the Development Environment:
 
 
 
-2. Install Node.js and npm:
-In PowerShell, run:
-
-PowerShell
-
-
-choco install nodejs -y
+*   Install Node.js and npm:
+    *   Download and install Node.js from the official website ([https://nodejs.org/](https://nodejs.org/)). This will also install npm (Node Package Manager).
+*   Install Express:
+    *   Open your terminal or PowerShell and run: `npm install express`
 
 
-
-3. Navigate to the project directory:
-In PowerShell, use the cd command to navigate to the directory where you extracted the files.
-
-PowerShell
-
-
-cd C:\BCFreightAPP 
+2. Create the Web Application:
 
 
 
-4. Install dependencies:
-Run the following command in PowerShell:
+*   Create Project Directory: Create a new folder for your project (e.g., "FreightWebApp").
+*   Develop the Front-end:
+    *   Create `index.html`: This will contain your HTML form for collecting freight information (origin, destination, weight, commodity). You can add basic CSS and JavaScript for styling and client-side validation.
+    *   (Optional) Create `styles.css` and `script.js` for more advanced styling and front-end functionality.
+*   Develop the Back-end:
+    *   Create `index.js`: This file will contain your Node.js/Express server code.
 
-PowerShell
+    ```javascript
+    const express = require('express');
+    const app = express();
+    const port = 3000; // You can change the port if needed
 
+    // Serve the HTML file
+    app.get('/', (req, res) => {
+      res.sendFile(__dirname + '/index.html');
+    });
 
-npm install
-
-
-
-5. Run the app:
-In PowerShell, run:
-
-PowerShell
-
-
-node index.js
-
-
-
-6. Verify the application:
-Open a web browser and go to http://localhost:3000. You should see the freight load information form.
-Example:
-
-macOS
-1. Install Homebrew (if not already installed):
-Open Terminal.
-Paste the following command and press Enter:
-
-Bash
+    // Start the server
+    app.listen(port, () => {
+      console.log(`Server listening on port ${port}`);
+    });
+    ```
 
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+3. Create the Terraform Infrastructure:
 
 
-Example:
 
-2. Install Node.js and npm:
-In Terminal, run:
+*   Install Terraform: Download and install Terraform from the official website ([https://www.terraform.io/](https://www.terraform.io/)).
+*   Create Terraform Configuration Files: Create the following files in your project directory:
 
-Bash
+    *   `main.tf`: This file will contain the main Terraform configurations.
+    *   `variables.tf`: This file will define variables for your infrastructure (e.g., instance types, AMI IDs).
+    *   `terraform.tfvars`: This file will store the values for your variables (including sensitive data like database passwords).
+    *   Create a `modules` folder: This folder will contain subfolders for each module (e.g., `vpc`, `ec2`, `rds`, `security_groups`). Each module folder will have its own `main.tf`, `variables.tf`, and `outputs.tf` files.
+    *   Create a `user_data` folder: This folder will contain your shell scripts (e.g., `web_server.sh`) for provisioning EC2 instances.
 
-
-brew install node
-
-
-3. Navigate to the project directory:
-In Terminal, use the cd command to navigate to the directory where you extracted the files.
-
-Bash
-
-
-cd /path/to/BCFreightAPP
-
-
-4. Install dependencies:
-Run the following command in Terminal:
-
-Bash
+*   Write Terraform Code:
+    *   Define your infrastructure in `main.tf`, using modules to organize your code.
+    *   Create a VPC with public and private subnets in two availability zones (AZs) for high availability.
+    *   Define security groups to control traffic between different tiers.
+    *   Launch EC2 instances for the web server and application server tiers in both AZs.
+    *   Create a multi-AZ RDS database instance for data persistence and high availability.
+    *   Use the `user_data` script to install Node.js, download the web app code from your Git repository (if applicable), and start the Node.js server on your web server instances.
 
 
-npm install
+4. Deploy the Infrastructure:
 
 
-5. Run the app:
-In Terminal, run:
 
-Bash
-
-
-node index.js
+*   Initialize Terraform: Run `terraform init` to initialize the working directory.
+*   Plan the Deployment: Run `terraform plan` to preview the changes Terraform will make.
+*   Apply the Deployment: Run `terraform apply` to create the infrastructure in your AWS account.
 
 
-6. Verify the application:
-Open a web browser and go to http://localhost:3000. You should see the freight load information form.
-Example:
+5. Verify the Deployment:
 
-This completes the installation process for BCFreightAPP on both Windows and macOS. You can now start using the application to submit freight load information.
-Sources
-1. https://github.com/appliedsciencegroup/raspberry-pi-cybersecurity-intro
+
+
+*   Check the AWS Management Console to verify that all resources have been created correctly.
+*   Obtain the public IP address of one of your web server instances.
+*   Access your web application in a browser using the public IP address.
+
+
+Summary:
+This documentation provides a step-by-step guide to building and deploying a basic freight web application on AWS using Terraform. It covers the key aspects of front-end and back-end development, infrastructure provisioning, and deployment. This foundation can be further expanded to include more advanced features and functionalities.
+Additional Notes:
+Ensure your AWS credentials are configured correctly for Terraform to access your account.
+Use appropriate instance types and storage sizes to optimize costs.
+Implement security best practices to protect your application and data.
+Consider using version control (e.g., Git) to track changes to your code and infrastructure.
+This documentation provides a basic framework. You can customize and enhance the application and infrastructure to meet your specific requirements.
+
